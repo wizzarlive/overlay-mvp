@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Overlay MVP</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#000;
+}
+
+.overlay{
+    position:fixed;
+    top:-65%;
+    left:-65.6%;
+    width:230%;
+    height:230%;
+    border:none;
+    z-index:1;
+    transform:scale(2.83);
+    transform-origin:center center;
+}
+
+.marco{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:2;
+    pointer-events:none;
+}
+
+.fire-container{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:220px;
+    z-index:3;
+    pointer-events:none;
+}
+
+.fire{
+    position:absolute;
+    bottom:-40px;
+    filter:blur(2px);
+    animation:flame linear forwards;
+    mix-blend-mode:screen;
+
+    border-radius:60% 60% 20% 20%;
+
+    clip-path:polygon(
+        50% 0%,
+        70% 20%,
+        90% 45%,
+        80% 80%,
+        50% 100%,
+        20% 80%,
+        10% 45%,
+        30% 20%
+    );
+}
+
+@keyframes flame{
+
+    0%{
+        transform:
+        translateY(0)
+        scale(.5)
+        rotate(-8deg);
+        opacity:0;
+    }
+
+    15%{
+        opacity:1;
+    }
+
+    50%{
+        transform:
+        translateY(-40px)
+        scale(.8)
+        rotate(5deg);
+    }
+
+    100%{
+        transform:
+        translateY(-80px)
+        scale(1.2)
+        rotate(-4deg);
+        opacity:0;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+<iframe
+class="overlay"
+src="https://api.bettertok.app/api/overlay/render/ecf75977da99337e7137df52e15cac71bc4dfa906c696c2611cf611bc9e987b5">
+</iframe>
+
+<img
+class="marco"
+src="fondo.png"
+alt="Marco">
+
+<div
+class="fire-container"
+id="fireContainer">
+</div>
+
+<script>
+
+const container =
+document.getElementById("fireContainer");
+
+function createFlame(){
+
+    const fire =
+    document.createElement("div");
+
+    fire.classList.add("fire");
+
+    const size =
+    15 + Math.random() * 35;
+
+    fire.style.width =
+    size + "px";
+
+    fire.style.height =
+    size * 3 + "px";
+
+    fire.style.left =
+    Math.random() * 100 + "%";
+
+    fire.style.background =
+    "conic-gradient(from 180deg, transparent 0deg, #ffdd66 20deg, #ff9900 60deg, #ff5500 120deg, #ff2200 180deg, #ff5500 240deg, #ffdd66 300deg, transparent 360deg)";
+
+    fire.style.boxShadow =
+    "0 0 10px #ff5500, 0 0 20px #ff2200, 0 0 30px #ff9900";
+
+    fire.style.animationDuration =
+    (1 + Math.random()) + "s";
+
+    container.appendChild(fire);
+
+    setTimeout(()=>{
+        fire.remove();
+    },2000);
+
+}
+
+setInterval(createFlame,25);
+
+</script>
+
+</body>
+</html>
