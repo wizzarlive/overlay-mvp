@@ -22,13 +22,13 @@ html,body{
 
 .overlay{
     position:fixed;
-    top:-65%;
-    left:-65.6%;
+    top:-67%;
+    left:-64.6%;
     width:230%;
     height:230%;
     border:none;
     z-index:1;
-    transform:scale(2.83);
+    transform:scale(3.3);
     transform-origin:center center;
 }
 
@@ -56,9 +56,6 @@ html,body{
 .fire{
     position:absolute;
     bottom:-40px;
-    filter:blur(2px);
-    animation:flame linear forwards;
-    mix-blend-mode:screen;
 
     border-radius:60% 60% 20% 20%;
 
@@ -72,6 +69,9 @@ html,body{
         10% 45%,
         30% 20%
     );
+
+    animation:flame linear forwards;
+    mix-blend-mode:screen;
 }
 
 @keyframes flame{
@@ -79,8 +79,8 @@ html,body{
     0%{
         transform:
         translateY(0)
-        scale(.5)
-        rotate(-8deg);
+        scale(.6)
+        rotate(-6deg);
         opacity:0;
     }
 
@@ -91,15 +91,15 @@ html,body{
     50%{
         transform:
         translateY(-40px)
-        scale(.8)
-        rotate(5deg);
+        scale(.9)
+        rotate(4deg);
     }
 
     100%{
         transform:
         translateY(-80px)
         scale(1.2)
-        rotate(-4deg);
+        rotate(-3deg);
         opacity:0;
     }
 
@@ -137,35 +137,35 @@ function createFlame(){
     fire.classList.add("fire");
 
     const size =
-    15 + Math.random() * 35;
+    12 + Math.random() * 25;
 
     fire.style.width =
     size + "px";
 
     fire.style.height =
-    size * 3 + "px";
+    size * 2.8 + "px";
 
     fire.style.left =
     Math.random() * 100 + "%";
 
     fire.style.background =
-    "conic-gradient(from 180deg, transparent 0deg, #ffdd66 20deg, #ff9900 60deg, #ff5500 120deg, #ff2200 180deg, #ff5500 240deg, #ffdd66 300deg, transparent 360deg)";
+    "linear-gradient(to top, #ffd54a 0%, #ff9800 35%, #ff5722 70%, #d50000 100%)";
 
     fire.style.boxShadow =
-    "0 0 10px #ff5500, 0 0 20px #ff2200, 0 0 30px #ff9900";
+    "0 0 8px #ff5722";
 
     fire.style.animationDuration =
-    (1 + Math.random()) + "s";
+    (1.2 + Math.random() * 0.8) + "s";
 
     container.appendChild(fire);
 
     setTimeout(()=>{
         fire.remove();
-    },2000);
+    },2200);
 
 }
 
-setInterval(createFlame,25);
+setInterval(createFlame,100);
 
 </script>
 
